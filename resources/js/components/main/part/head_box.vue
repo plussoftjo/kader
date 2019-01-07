@@ -7,17 +7,15 @@
 			src="./images/index/navHeader.jpg">
 				<div class="headBox_line">
 					<div class="font-weight-black fsize-4">
-						اكاديمية كادر
+						{{$vuetify.lang.current.main.head.title }}
 					</div>
 					<div class="fsize-1 subTitle_headBox mt-3 hidden-sm-and-down" >
-						المكان المناسب للتعلم عن بعد اينما كنت وفي اي وقت مع مجموعة من الكورسات 
+						{{$vuetify.lang.current.main.head.sub }}
 					</div>
 					<div class="headSearch mt-4">
-						<v-text-field
-						solo
-						v-model="search"
-						label="بماذا ستبدا ؟"
-						append-icon="search"></v-text-field>
+						<v-btn class="blue lighten-1 font-weight-black borderBtn" block dark @click="$router.push({name:'order_course'})"><v-icon class="white--text">create</v-icon>
+						{{$vuetify.lang.current.main.head.btn }}
+					</v-btn>
 					</div>
 				</div>
 			</v-img>
@@ -43,8 +41,18 @@
 		data() {
 			return {
 				search:'',
-				items:[{text:'10 كورسات شاملة ', sub:'تصفح الكورسات'},{text:'مجموعة من الخبراء',sub:'في كادر انت بين ايدي مجموعة من الخبراء'},{text:'اسعار مناسبة',sub:'في كادر وفر على نفسك الكثير'}]
+				items:[{text:'نبحث لك', sub:'عن الكورس المناسب لك '},{text:'مجموعة من الخبراء',sub:'كفائة في مجال التدريب'},{text:'اسعار منافسة',sub:'وفر على نفسك الكثير'}]
 			}
+		},
+		methods:{
+			installLang() {
+				const vm = this;
+				vm.items = vm.$vuetify.lang.current.main.secound_line;
+			}
+		},
+		created() {
+			const vm = this;
+			vm.installLang();
 		}
 	}
 </script>
@@ -63,6 +71,7 @@
 	}
 
 
-			.numberHead{font-size: 24px; font-weight: 700;}
-			.numberNum{font-size: 20px; font-weight: 400;}
+			.numberHead{font-size: 24px; font-weight: 700; font-family: 'Cairo', sans-serif !important;}
+			.numberNum{font-size:18px; font-weight: 400; font-family: 'Cairo', sans-serif !important;}
+	.borderBtn{border-radius: 10px;}
 </style>

@@ -7,11 +7,12 @@
     <v-tabs-slider color="blue darken-4"></v-tabs-slider>
 
     <v-tab
-      v-for="(i,index) in catgs"
+      v-for="(i,index) in catg"
       :key="index"
+      @click="() => {active = i.id}"
       class="font-weight-black ff title ff"
     >
-        {{i.title}}
+        {{i.name}}
     </v-tab>
   </v-tabs>
 </template>
@@ -24,6 +25,8 @@
           {title:'طب اعام '},
           ]
         }      
-    }
+    },
+    props:['catg','active'],
+
   }
 </script>

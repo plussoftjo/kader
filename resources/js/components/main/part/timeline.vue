@@ -3,7 +3,7 @@
 		<v-card>
 			<v-card-title class="blue darken-4 white--text">
 				<div style="width: 100%;" class="font-weight-black title text-xs-center">
-					كيف سابدا ؟ 
+					{{$vuetify.lang.current.main.timeline.head_line }}
 				</div>
 			</v-card-title>
 			<v-card-title>
@@ -38,31 +38,18 @@
   export default {
     data: () => ({
       items: [
-        {
-          color: 'red lighten-2',
-          icon: 'search',
-          head_text:'الكورس المناسب ',
-          conent:'احبث عن الكورس المناسب لك من بين مجموعة من الكورسات  المتوفرة بين يديك'
-        },
-        {
-          color: 'green lighten-2',
-          icon: 'person_add',
-          head_text:'انضم لنا',
-          conent:'انضم الى مجموعة كادر وسجل بخطوات بسيطة '
-        },
-        {
-          color: 'purple lighten-2',
-          icon: 'star',
-          head_text:'اشترك بالدورة',
-          conent:'اشترك بالدورة بعد مشاهدة عينات للدورة المطلوبة'
-        },
-        {
-          color: 'blue lighten-2',
-          icon: 'credit_card',
-          head_text:'اكمل الطلب',
-          conent:'اكمل معلومات الدفع واكمل الطلب للاشتراك بالدورة'
-        },
+       
       ]
-    })
+    }),
+    methods:{
+    	installLanguage(){
+    		const vm = this;
+    		vm.items = vm.$vuetify.lang.current.main.timeline.items;
+    	}
+    },
+    created() {
+    	const vm = this;
+    	vm.installLanguage();
+    }
   }
 </script>

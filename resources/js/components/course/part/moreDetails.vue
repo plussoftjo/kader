@@ -2,17 +2,11 @@
 	<div class="moreDetails text-xs-right">
 		<v-container grid-list-md>
 			<div class="title font-weight-black ff ">
-				المتطلبات
+				{{$vuetify.lang.current.course_g.req }}
 			</div>	
 			<ul class="listStyle ff">
-				<li>
-					متطلب 
-				</li>
-				<li>
-					متطلب 
-				</li>
-				<li>
-					متطلب 
+				<li v-for="(c,index) in course.course_reqs" :key="index">
+					{{c.title}}
 				</li>
 			</ul>
 
@@ -22,7 +16,7 @@
 </template>
 <script>
 	export default {
-
+		props:['course']
 	}
 </script>
 <style>

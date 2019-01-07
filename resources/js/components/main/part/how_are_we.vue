@@ -3,16 +3,17 @@
 		<v-container grid-list-lg >
 			<v-layout row wrap>
 				<v-flex md4>
-					<div class="font-weight-black blue--text fsize-1 text-xs-left">
-						من نحن 
+					<div class="font-weight-black blue--text fsize-1 text-xs-center">
+						{{$vuetify.lang.current.main.how_are_we.how_are_we }}
 					</div>
-					<div class="title font-weight-black ff text-xs-left pt-1">
-						اكاديمية كادر للتعلم عن بعد
+					<div class="title font-weight-black ff text-xs-center pt-1">
+						{{$vuetify.lang.current.main.how_are_we.name }}
 					</div>
 				</v-flex>
 				<v-flex md8	>
-					<div class="title pt-2 ll text-xs-right">
-						يمكنك من خلال كادر التعلم عن بعد في اي وقت واي زمان من خلال اساليب حديثة ودروس مفصلة وتفاصيل اكثر من خبارء في التعليم عن بعد
+					<div class="pt-2 ll text-xs-right">
+						{{$vuetify.lang.current.main.how_are_we.content.first }}<br> 
+						{{$vuetify.lang.current.main.how_are_we.content.secound }}
 					</div>
 				</v-flex>
 			</v-layout>
@@ -21,7 +22,7 @@
 				<v-layout row wrap>
 					<v-flex md3 v-for="(i,index) in items" :key="index">
 						<v-card class="bottomBorder cirled text-xs-right">
-							<v-container>
+							<v-container class="pa-2 ma-2">
 								<v-card-title class="mt-0 pt-0">
 									
 								<div style="width: 100%;">
@@ -30,7 +31,7 @@
 								<div class="fsize-1 font-weight-black mt-2 text-xs-right" style="width: 100%;">
 									{{i.name}}
 								</div>
-								<div class="fsize-1 mt-2 lineH">
+								<div class="font-weight-black mt-2 lineH">
 									{{i.title}}
 								</div>
 								</v-card-title>
@@ -49,12 +50,19 @@
 		data() {
 			return {
 				items:[
-					{icon:'home',name:'من المنزل',title:'ادرس من البيت في اي وقت وفي اي مكان مع كادر'},
-					{icon:'search',name:'الكورس المناسب',title:'ابحث على الكورس المناسب لك من عدة كورسات متوفرة'},
-					{icon:'credit_card',name:'طرق الدفع',title:'طريقة الدفع المناسبة لك من عدة طرق دفع أمنه ومناسبة للجميع'},
-					{icon:'people_outline',name:'خبراء ',title:'في كادر انت بين اايدي امهر الاطباء للتعلم بكل سهولة ويسر'},
+					
 					],
 			}
+		},
+		methods:{
+			installLang() {
+				const vm = this;
+				vm.items = vm.$vuetify.lang.current.main.how_are_we.items;
+			}
+		},
+		created() {
+			const vm = this;
+			vm.installLang();
 		}
 	}
 </script>
@@ -62,5 +70,4 @@
 	.lineH{line-height: 1.8;}
 	.bottomBorder{border-bottom: 3px solid #0d47a1 !important; transition: all 0.3s;}
 	.cirled{border-radius: 10px; cursor:pointer; }
-	.cirled:hover {border-left:2px solid #0d47a1 !important; border-right: 2px solid #0d47a1 !important; border-bottom: 3px solid #0d47a1 !important; }
 </style>

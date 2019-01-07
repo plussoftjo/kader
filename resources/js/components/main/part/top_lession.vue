@@ -1,72 +1,62 @@
 <template>
 	<div class="top_lession mt-5">
-		<div class="title text-xs-center font-weight-black ll">
-			افضل الدروس
+		<div class="fsize-3 text-xs-center font-weight-black ll">
+			{{$vuetify.lang.current.main.top_lession.head_line }}
 		</div>
 
 		<div class="bodysTopLession">
-			<v-container grid-list-md>
+			<v-container grid-list-sm class="pa-0 ma-0">
 				<v-layout row wrap>
 					<v-flex md3 class="grey lighten-4 pa-4 pt-5">
-						<div class="fsize-3 font-weight-black text-xs-right ">
-							اختار من بين افضل الكورسات
+						<div class="fsize-2 font-weight-black text-xs-center blue--text">
+							{{$vuetify.lang.current.main.top_lession.sub_head }}
 						</div>
-						<div class="title text-xs-right ff pt-1">
-							اختار الفئة المناسبة التي تريد التعلم منها وتعلم من افضل الكورسات المتوفررة في كادر
+						<div class="title text-xs-right ff pt-1 text-xs-center">
+							{{$vuetify.lang.current.main.top_lession.content }}
 						</div>
 					</v-flex>
 					<v-flex md9>
 						<v-tabs v-model="active"  >
 							<v-tab
-							v-for="n in tabss"
-							:key="n"
+							v-for="(n,index) in tabss"
+							:key="index"
 							class="font-weight-black title ff"
 							>
-								{{n}}
+								{{n.name}}
 							</v-tab>
-							<v-tab-item v-for="n in tabss" :key="n">
-								<v-layout row wrap>
-									<v-flex md4 v-for="(i,index) in 3" :key="index" @click="$router.push({name:'course'})">
-										<v-card class="circled elevation-8">
-											<v-img
-											height="200px"
-											src="/images/index/lession.jpg">
-											</v-img>
-											<v-card-title class="bluergba text-xs-right ff">
-												<div class="font-weight-black fsize-2" style="width: 100%;">
-												اسم الكورس
-												</div>
-												<div class="fsize-1 pt- ff" style="width: 100%; ">
-													اسم الدكتور
-												</div>
-												<div class="fsize-1 pt-2 " style="width: 100%;">
-													23 درس
-												</div>
-												<div style="width: 100%; padding:5px;" >
-													<div class="font-weight-black fsize-1 red--text" style="position: absolute; left: 10px; bottom:10px;">
-														10JD
-													</div>
-												</div>
-											</v-card-title>
-										</v-card>
-									</v-flex>
-								</v-layout>			
+							<v-tab-item v-for="(n,index) in tabss" :key="index">
+								<lession :catg_id="n.id"></lession>
 							</v-tab-item>
 						</v-tabs>
 					</v-flex>
 				</v-layout>
-
 			</v-container>
 		</div>
 	</div>
 </template>
 <script>
+	import lession from './top_lession/lession.vue'
 	export default {
+		components:{lession},
 		data() {
 			return {
-				tabss:['طب اسنان','طب عام'],
+				tabss:[],
 				active:'طب اسنان'
 			}
+		},
+		methods:{
+			install() {
+				const vm = this;
+				axios.get('catg/index').then(response => {
+					vm.tabss = response.data;
+				}).catch(err => {
+					console.log(err)
+				});
+			}
+		},
+		created() {
+			const vm = this;
+			vm.install();
 		}
 	}
 </script>

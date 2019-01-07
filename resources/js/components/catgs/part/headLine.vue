@@ -2,7 +2,7 @@
 	<div style="position: relative;" class="text-xs-right">
 		<div class="headLine">
 			<div class="title ff text-xs-right white--text pa-3 poss font-weight-black">
-				طب اسنان
+				{{catg_name}}
 			</div>
 		</div>
 		<v-card>
@@ -11,31 +11,24 @@
 					<v-layout row wrap>
 						<v-flex md4>
 							<v-img
-							src="/images/index/lession.jpg"
+							:src="first_course.image"
+							contain
 							height="200px"></v-img>
 						</v-flex>
 						<v-flex md8>
 							<v-card-title>
 								<div class="title ff font-weight-black" style="width: 100%;">
-									الكورس المميز
+									{{$vuetify.lang.current.catgs.course.best }}
 								</div>
-								<div class="fsize-4 font-weight-black" style="width: 100%;">
-									اسم الكورس
+								<div class="fsize-2 font-weight-black" style="width: 100%;">
+									{{$vuetify.lang.current.course_g.name }} {{first_course.title}}
 								</div>
-								<div class="title ff" style="width: 100%;">
-									تاريخ الكورس : <span class="font-weight-black">2018</span>
+								<div class="title pt-3 ff red--text" style="width: 100%;">
+									{{$vuetify.lang.current.course_g.price }} {{first_course.price}}
 								</div>
-								<div class="title pt-3 ff" style="width: 100%;">
-									23 درس
-								</div>
-								<v-btn class="primary ff" @click="$router.push({name:'course'})">
-									اكتشف الكورس
+								<v-btn class="primary ff mt-3" @click="$router.push({name:'course',params:{id:first_course.id}})">
+								{{$vuetify.lang.current.course_g.sub }}
 								</v-btn>
-								<div class="posssss">
-									<div class="title ff red--text font-weight-black">
-										10JD
-									</div>
-								</div>
 							</v-card-title>
 						</v-flex>
 					</v-layout>		
@@ -48,7 +41,7 @@
 </template>
 <script>
 	export default {
-
+		props:['first_course','catg_name']
 	}
 </script>
 <style>
